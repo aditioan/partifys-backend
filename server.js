@@ -4,6 +4,7 @@ import index from './routes/index';
 import path from 'path';
 import fs from 'file-system';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
@@ -15,6 +16,15 @@ const port = process.env.PORT || 8080;
 
 // Setup body-parser
 app.use(bodyParser.json({ extended: false }));
+
+//connect to mongodb
+mongoose.connect('mongodb://localhost:27017/express_app', function() {
+        console.log('Connection has been made');
+    })
+    .catch(err => {
+        console.error('App starting error:', err.stack);
+        process.exit(1);
+    });
 
 // Setup our routes. These will be served as first priority.
 // Any request to /api will go through these routes.
