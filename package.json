@@ -1,0 +1,29 @@
+{
+  "name": "partifys-backend",
+  "version": "1.0.0",
+  "description": "Backend for partifys app using expressjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node -r esm server.js",
+    "server": "npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditioan/partifys-backend.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aditioan/partifys-backend/issues"
+  },
+  "homepage": "https://github.com/aditioan/partifys-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "file-system": "^2.2.2",
+    "uuid": "^7.0.3"
+  }
+}
