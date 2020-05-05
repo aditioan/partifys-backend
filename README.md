@@ -1,2 +1,3 @@
 # partifys-backend
-Group project backend COMPSCI 732 
+
+Group project backend COMPSCI 732

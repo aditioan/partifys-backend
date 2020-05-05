@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node -r esm server.js",
-    "server": "npm run start"
+    "server": "npm run start",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,22 @@
   },
   "homepage": "https://github.com/aditioan/partifys-backend#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "file-system": "^2.2.2",
     "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3",
+    "passport": "^0.4.1",
+    "passport-spotify": "^1.1.0",
+    "querystring": "^0.2.0",
     "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }
