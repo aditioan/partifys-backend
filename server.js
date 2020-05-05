@@ -22,7 +22,7 @@ app.use(bodyParser.json({ extended: false }));
 //connect to mongodb
 mongoose
   .connect(
-    "mongodb+srv://admin:test@nodetutorial-3wvbp.mongodb.net/test?retryWrites=true&w=majority",
+    process.env.MONGODB_URI,
     { useUnifiedTopology: true },
     function () {
       console.log("Connection has been made");
