@@ -36,6 +36,28 @@ router.get(
   }
 );
 
+router.post("/join",(req,res)=>{
+  const {roomNumber} = req.body;
+  console.log(roomNumber)
+
+  Room.findOne({roomNumber:roomNumber}).then((room)=>{
+    if(room){
+      const details={
+        owner:room.ownername,
+        roomNumber:room.roomNumber
+      }
+     return res.status(200).json(details)
+    }
+    else{
+      const errors={
+        error: "No room available"
+      }
+      return res.status(404).json(errors)
+    }
+  })
+  
+})
+
 router.post("/", async (req, res) => {
   const { code, state } = req.body;
 
@@ -69,6 +91,7 @@ router.post("/", async (req, res) => {
   };
 
   let user = await getUser(meUrl, userConfig);
+  
 
   Room.findOne({ spotify_id: user.id }).then((room) => {
     if (room) {
