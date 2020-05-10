@@ -59,8 +59,11 @@ router.post("/join",(req,res)=>{
 })
 
 router.post("/", async (req, res) => {
-  const { code, state } = req.body;
+try {
+  
 
+  const { code, state } = req.body;
+  
   //Get accesstoken
   const data = {
     code: code,
@@ -93,10 +96,11 @@ router.post("/", async (req, res) => {
   let user = await getUser(meUrl, userConfig);
   
 
-  Room.findOne({ spotify_id: user.id }).then((room) => {
+ await  Room.findOne({ spotify_id: user.id }).then((room) => {
     if (room) {
       let error = {};
       error.room = "Room already present";
+      error.ownername = room.ownername;
       error.roomNumber = room.roomNumber;
       res.status(200).json(error);
       return;
@@ -118,6 +122,9 @@ router.post("/", async (req, res) => {
       }
     }
   });
+} catch (error) {
+  //console.log(error)
+}
 });
 
 const fetchAccessToken = async (url, data, config) => {
@@ -139,5 +146,7 @@ const getUser = async (url, config) => {
   let result = await axios.get(url, config);
   return result.data;
 };
+
+
 
 module.exports = router;
