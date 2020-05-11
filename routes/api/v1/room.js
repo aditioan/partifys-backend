@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const qs = require("querystring");
 const Room = require("../../../models/Room");
+const User = require("../../../models/Users");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -37,22 +38,46 @@ router.get(
 );
 
 router.post("/join",(req,res)=>{
-  const {roomNumber} = req.body;
-  console.log(roomNumber)
+  const {roomNumber,guestName} = req.body;
+
 
   Room.findOne({roomNumber:roomNumber}).then((room)=>{
     if(room){
-      const details={
-        owner:room.ownername,
-        roomNumber:room.roomNumber
-      }
-     return res.status(200).json(details)
+     
+      const newGuest = new User({
+        name : guestName,
+        
+      })
+
+      newGuest.rooms.push(room.id);
+      
+      
+      
+      
+      newGuest
+        .save()
+        .then(user => {
+          room.users.push(user.id);
+          room.save();
+          let details = {
+            room : room,
+            user : user
+          }
+          res.json(details)
+
+
+        } )
+       .catch(err => res.json(err));
+
+
+
+     
     }
     else{
       const errors={
         error: "No room available"
       }
-      return res.status(404).json(errors)
+      return res.status(400).json(errors)
     }
   })
   
@@ -114,8 +139,17 @@ try {
         refresh_token: result.data.refresh_token,
         expires_in: Date.now(),
       });
+      
       room.save();
       if (room.access_token !== "") {
+        let user = new User({
+          name : room.ownername,
+          isHost : true,
+
+        })
+        user.rooms.push(room.id);
+        user.save();
+
         res.send(room);
       } else {
         res.json(result);
