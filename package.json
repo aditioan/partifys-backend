@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node -r esm server.js",
-    "server": "npm run start"
+    "server": "npm run start",
+    "test": "./node_modules/.bin/jest socket_server/"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,11 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "file-system": "^2.2.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
     "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
   }
 }
