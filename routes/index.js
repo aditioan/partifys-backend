@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express';
 
 const UserRepository = require('../socket_server/repositories/User')
 const PartyRepository = require('../socket_server/repositories/Party')
