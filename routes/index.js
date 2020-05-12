@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express')
 
-import UserRepository from '../socket_server/repositories/User'
-import PartyRepository from '../socket_server/repositories/Party'
+const UserRepository = require('../socket_server/repositories/User')
+const PartyRepository = require('../socket_server/repositories/Party')
 
 let router = express.Router();
 

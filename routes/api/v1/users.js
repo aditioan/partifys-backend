@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+const { v4: uuid } = require('uuid');
 
 module.exports.controller = (app) => {
     let users = {
