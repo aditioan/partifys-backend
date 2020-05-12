@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 
 const UserRepository = require('../socket_server/repositories/User')
 const PartyRepository = require('../socket_server/repositories/Party')
@@ -19,4 +19,4 @@ router.get('/', function (req, res) {
     res.render('../views/admin', {data : data})
 })
 
-export default router;
+module.exports = router;
