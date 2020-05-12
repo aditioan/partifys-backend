@@ -51,12 +51,12 @@ app.use(bodyParser.json({ extended: false }));
 // Any request to /api will go through these routes.
 app.use("/", index);
 
-fs.readdirSync('routes'+process.env.EXPRESS_API_VERSION).forEach(function (file) {
-    if(file.substr(-3) == '.js') {
-        const route = require('./routes'+ process.env.EXPRESS_API_VERSION + '/' + file)
-        route.controller(app)
-    }
-})
+// fs.readdirSync('routes'+process.env.EXPRESS_API_VERSION).forEach(function (file) {
+//     if(file.substr(-3) == '.js') {
+//         const route = require('./routes'+ process.env.EXPRESS_API_VERSION + '/' + file)
+//         route.controller(app)
+//     }
+// })
 
 
 // Make the "public" folder available statically
