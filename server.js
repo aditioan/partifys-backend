@@ -1,13 +1,13 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import index from './routes/index';
-import path from 'path';
-import fs from 'file-system';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import http from 'http';
-import Io from 'socket.io';
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const fs = require('file-system');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const http = require('http');
+const Io = require('socket.io');
 
+const index = require('./routes/index');
 const TokenService = require('./socket_server/services/Token')
 const UserRepository = require('./socket_server/repositories/User')
 const PartyRepository = require('./socket_server/repositories/Party')
@@ -51,12 +51,12 @@ app.use(bodyParser.json({ extended: false }));
 // Any request to /api will go through these routes.
 app.use("/", index);
 
-// fs.readdirSync('routes'+process.env.EXPRESS_API_VERSION).forEach(function (file) {
-//     if(file.substr(-3) == '.js') {
-//         const route = require('./routes'+ process.env.EXPRESS_API_VERSION + '/' + file)
-//         route.controller(app)
-//     }
-// })
+fs.readdirSync('routes'+process.env.EXPRESS_API_VERSION).forEach(function (file) {
+    if(file.substr(-3) == '.js') {
+        const route = require('./routes'+ process.env.EXPRESS_API_VERSION + '/' + file)
+        route.controller(app)
+    }
+})
 
 
 // Make the "public" folder available statically
