@@ -84,7 +84,7 @@ const commandBus = createCommandBus(Object.assign({}, container, { eventBus }))
 //start listening on socket
 io.on('connection', socket => {
     socket.__data = {}
-  
+   
     socket.on('party/create', async ({ party, code }, ack) => {
       const response = await commandBus.dispatch(
         new CreatePartyCommand(party, code, socket.id)
@@ -109,6 +109,7 @@ io.on('connection', socket => {
         ack(response.error.message)
       } else {
         socket.__data.role = 'guest'
+       
   
         ack(null, { accessToken: response.value })
       }
@@ -138,6 +139,9 @@ io.on('connection', socket => {
       } else if (socket.__data.role === 'guest') {
         await commandBus.dispatch(new LeavePartyCommand(socket.id))
       }
+    })
+    socket.on('chat message',async (data)=>{
+      socket.broadcast.emit('new_message',data)
     })
   })
   
