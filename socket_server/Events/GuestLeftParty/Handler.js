@@ -13,11 +13,14 @@ module.exports = class UserLeftPartyEventHandler {
    */
   async handle (event) {
     const party = await this.partyRepository.findById(event.partyId)
-    const host = await this.userRepository.findById(party.hostId)
 
-    this.io
-      .to(host.connectionId)
-      .emit('signaling/leave', { remoteId: event.userId })
+    if(party != null){
+      const host = await this.userRepository.findById(party.hostId)
+  
+      this.io
+        .to(host.connectionId)
+        .emit('signaling/leave', { remoteId: event.userId })
+    }
   }
 
   listenTo () {
