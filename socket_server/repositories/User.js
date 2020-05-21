@@ -23,7 +23,7 @@ module.exports = class UserRepository {
       console.error(err.message)
     }
 
-    //return user
+    // return user
     return userDb
   }
 
@@ -33,7 +33,7 @@ module.exports = class UserRepository {
     this._users[userId].role = 'host'
 
     try {
-      await User.update(
+      await User.updateOne(
         { id: userId },
         {
           $set: {
@@ -46,6 +46,8 @@ module.exports = class UserRepository {
     } catch (err) {
       console.error(err.message)
     }
+
+    return true;
   }
 
   async joinParty(userId, partyId, connectionId) {
@@ -54,7 +56,7 @@ module.exports = class UserRepository {
     this._users[userId].role = 'guest'
 
     try {
-      await User.update(
+      await User.updateOne(
         { id: userId },
         {
           $set: {
@@ -67,6 +69,8 @@ module.exports = class UserRepository {
     } catch (err) {
       console.error(err.message)
     }
+
+    return true;
   }
 
   async findById(id) {
@@ -81,16 +85,20 @@ module.exports = class UserRepository {
     return userDb
   }
 
-  async findByPartyId(partyId) {
-    let userDbs
+  findByPartyId(partyId) {
+
+    return Object.values(this._users).filter((x) => x.partyId === partyId)
+  }
+
+  async findDBByPartyId(partyId) {
+    let userDb
     try {
-      userDbs = await User.find({ partyId })
+      userDb = await User.find({ partyId: partyId })
     } catch (err) {
       console.error(err.message)
     }
 
-    //return Object.values(this._users).filter((x) => x.partyId === partyId)
-    return userDbs
+    return userDb
   }
 
   async findByConnectionId(connectionId) {
@@ -110,20 +118,24 @@ module.exports = class UserRepository {
 
   async leaveParty(userId) {
     try {
-      await User.update(
-        { id: userId },
-        {
-          $unset: {
-            partyId: 1,
-            connectionId: 1,
-          },
-        }
-      )
+      await User.findOneAndDelete({ id: userId })
     } catch (err) {
       console.error(err.message)
     }
 
     delete this._users[userId].partyId
     delete this._users[userId].connectionId
+    
+    return userId;
+  }
+
+  async deleteParty(partyId) {
+    try {
+      await User.findOneAndDelete({ partyId })
+    } catch (err) {
+      console.error(err.message)
+    }
+    
+    return partyId;
   }
 }

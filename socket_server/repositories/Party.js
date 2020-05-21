@@ -6,16 +6,15 @@ module.exports = class PartyRepository {
     this._parties = []
   }
 
-  findAll() {
-    // let partiesDb
-    // try {
-    //   partiesDb = await Party.find()
-    // } catch (err) {
-    //   console.error(err.message)
-    // }
+  async findAll() {
+    let partiesDb
+    try {
+      partiesDb = await Party.find({})
+    } catch (err) {
+      console.error(err.message)
+    }
 
-    return this._parties
-    //return partiesDb
+    return partiesDb
   }
 
   findById(id) {
@@ -77,5 +76,7 @@ module.exports = class PartyRepository {
     } catch (err) {
       console.error(err.message)
     }
+
+    return true;
   }
 }

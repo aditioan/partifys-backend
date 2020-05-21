@@ -12,7 +12,8 @@ test('Notifies the guests that the party is over', async () => {
         id: userId,
         connectionId: `connection-${userId}`
       })
-    )
+    ),
+    deleteParty: jest.fn().mockResolvedValue(true)
   }
   const event = new PartyDeletedEvent('party-id', ['user-1', 'user-2'])
 
