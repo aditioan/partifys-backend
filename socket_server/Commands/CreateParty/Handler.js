@@ -6,7 +6,7 @@ module.exports = class CreatePartyHandler {
    * Builds the handler.
    * @param {{ findByName: name => Promise>}} partyRepository
    */
-  constructor (userRepository, partyRepository) {
+  constructor(userRepository, partyRepository) {
     this.userRepository = userRepository
     this.partyRepository = partyRepository
   }
@@ -15,7 +15,7 @@ module.exports = class CreatePartyHandler {
    * Handles the CreateParty command.
    * @param {{ partyName: string, code: string, hostId: string}} command - The command.
    */
-  async handle (command) {
+  async handle(command) {
     const user = await this.userRepository.create()
     const party = await this.partyRepository.create(
       command.partyName,
@@ -28,7 +28,7 @@ module.exports = class CreatePartyHandler {
     return CommandResponse.withValue(party.id)
   }
 
-  listenTo () {
+  listenTo() {
     return CreatePartyCommand.COMMAND_TYPE
   }
 }
