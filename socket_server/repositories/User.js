@@ -23,8 +23,8 @@ module.exports = class UserRepository {
       console.error(err.message)
     }
 
-    // return user
-    return userDb
+    return user
+    // return userDb
   }
 
   async joinAsCreator(userId, partyId, connectionId) {
@@ -81,8 +81,8 @@ module.exports = class UserRepository {
       console.error(err.message)
     }
 
-    //return this._users[id]
-    return userDb
+    return this._users[id]
+    // return userDb
   }
 
   findByPartyId(partyId) {
@@ -109,11 +109,11 @@ module.exports = class UserRepository {
       console.error(err.message)
     }
 
-    // return (
-    //   Object.values(this._users).find((x) => x.connectionId === connectionId) ||
-    //   null
-    // )
-    return userDb
+    return (
+      Object.values(this._users).find((x) => x.connectionId === connectionId) ||
+      null
+    )
+    // return userDb
   }
 
   async leaveParty(userId) {
@@ -131,7 +131,7 @@ module.exports = class UserRepository {
 
   async deleteParty(partyId) {
     try {
-      await User.findOneAndDelete({ partyId })
+      await User.deleteMany({ partyId })
     } catch (err) {
       console.error(err.message)
     }
