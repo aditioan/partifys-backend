@@ -19,8 +19,11 @@ module.exports = class PartyDeletedEventHandler {
     const users = await Promise.all(
       event.guests.map(userId => this.userRepository.findById(userId))
     )
+    users.forEach(user => {
+      this.io.to(user.connectionId).emit('signaling/leave')
+    })
 
-    users.forEach(user => this.io.to(user.connectionId).emit('signaling/leave'))
+    await this.userRepository.deleteParty(users[0].partyId)
   }
 
   listenTo () {

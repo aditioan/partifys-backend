@@ -3,7 +3,7 @@ const CommandResponse = require('../Response')
 const UserJoinedPartyEvent = require('../../Events/UserJoinedParty/Event')
 
 module.exports = class JoinPartyCommandHandler {
-  constructor (tokenService, partyRepository, userRepository) {
+  constructor(tokenService, partyRepository, userRepository) {
     this.tokenService = tokenService
     this.partyRepository = partyRepository
     this.userRepository = userRepository
@@ -13,7 +13,7 @@ module.exports = class JoinPartyCommandHandler {
    * Handles JoinParty commands.
    * @param {JoinPartyCommand} command - The command to handle
    */
-  async handle (command) {
+  async handle(command) {
     const party = await this.partyRepository.findByName(command.partyName)
 
     if (command.accessToken) {
@@ -41,7 +41,7 @@ module.exports = class JoinPartyCommandHandler {
     const user = await this.userRepository.create()
     const accessToken = await this.tokenService.create({
       userId: user.id,
-      partyId: party.id
+      partyId: party.id,
     })
 
     await this.userRepository.joinParty(user.id, party.id, command.connectionId)
@@ -52,7 +52,7 @@ module.exports = class JoinPartyCommandHandler {
     )
   }
 
-  listenTo () {
+  listenTo() {
     return JoinPartyCommand.COMMAND_TYPE
   }
 }
