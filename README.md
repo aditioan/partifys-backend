@@ -59,7 +59,7 @@ npm start
 
 ## Creating the environment file
 
-**Creating a MongoDB Atlas cluster
+**Creating a MongoDB Atlas cluster**
 
 - Follow this MongoDB Atlas official tutorial for [Creating a new cluster](https://docs.atlas.mongodb.com/tutorial/create-new-cluster/)
 - Once the cluster is created, create a database user
@@ -69,5 +69,5 @@ npm start
 - View connection to cluster, choose connect by applicatoin
 - Save a `connection string` and copy it in your env file
 
-**Creating a JWT Secret Key
+**Creating a JWT Secret Key**
 - You can generate using ssh-gen or [Online Web key generator](https://mkjwk.org/)
