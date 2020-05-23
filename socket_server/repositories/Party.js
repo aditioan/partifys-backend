@@ -1,4 +1,5 @@
 const uuid = require('uuid')
+const Party = require('../../models/Party')
 
 module.exports = class PartyRepository {
   constructor () {

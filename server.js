@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('file-system');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const http = require('http');
 const Io = require('socket.io');
+const connectDB = require('./db')
 
 const index = require('./routes/index');
 const TokenService = require('./socket_server/services/Token')
@@ -39,13 +39,7 @@ const userRepository = new UserRepository()
 app.use(bodyParser.json({ extended: false }));
 
 //connect to mongodb
-// mongoose.connect('mongodb://localhost:27017/express_app', function() {
-//         console.log('Connection has been made');
-//     })
-//     .catch(err => {
-//         console.error('App starting error:', err.stack);
-//         process.exit(1);
-//     });
+connectDB(process.env.mongoURI)
 
 // Setup our routes. These will be served as first priority.
 // Any request to /api will go through these routes.
