@@ -13,7 +13,7 @@ Group project COMPSCI 732 Back-end repository
 4. Wei Lu (wlu702 / 778099429)
 
 ## Description
-This project was created for completing group project for COMPSCI 732 course, at The University of Auckland. We utilize Spotify open API to create a website to host a “Party Playlist” using a Spotify premium account. The users must have a Spotify premium account to create the room. The backend server for party spotify aplication was created using expressjs, WebRTC and socket io. All the signaling process and database connection is done using RESTfull API call.
+This project was created for the group project in the COMPSCI 732 course, at The University of Auckland. We utilize Spotify open API to create a website to host a “Party Playlist” using a Spotify premium account. The users must have a Spotify premium account to create the room. The backend server for party spotify aplication was created using expressjs, WebRTC and socket io. All the signaling process and database connection is done using RESTfull API call.
 
 
 ## Main Features
