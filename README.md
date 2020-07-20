@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/aditioan/partifys-backend.svg?branch=master)](https://travis-ci.com/aditioan/partifys-backend.svg?branch=master) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # PARTIFYS PROJECT
-#### [https://partifys.studio/](https://partifys.studio/)
+#### [https://partifys.herokuapp.com/](https://partifys.herokuapp.com/)
 Group project COMPSCI 732 Back-end repository
 
 ![screenshot](./public/group_project.png)
